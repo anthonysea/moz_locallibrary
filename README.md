@@ -4,7 +4,7 @@ Django walkthrough by the Mozilla Developer Network to create a simulated librar
 
 ## Learning points
 
-- get_absolute_url
+- [get_absolute_url](https://docs.djangoproject.com/en/3.0/ref/models/instances/#get-absolute-url)
 
     ```python
     def get_absolute_url(self):  
@@ -20,7 +20,7 @@ Django walkthrough by the Mozilla Developer Network to create a simulated librar
     {% endfor %}
     ```
 
-- django.views.generic
+- [django.views.generic](https://docs.djangoproject.com/en/3.0/ref/class-based-views/generic-display/)
 
     ```python 
     from django.views import generic
@@ -42,7 +42,7 @@ Django walkthrough by the Mozilla Developer Network to create a simulated librar
 
     Within the generic views, can also change functionality such as `queryset`, `template_name`, pagination (`paginate_by`) and `context_data`
 
-- Following relationships 'backwards' (reverse lookup) with `FOO_set.all` where `FOO` is the source model name (model with the foreign key)
+- [Following relationships 'backwards'](https://docs.djangoproject.com/en/3.0/topics/db/queries/#following-relationships-backward) (reverse lookup) with `FOO_set.all` where `FOO` is the source model name (model with the foreign key)
 
     Reverse lookup can be done using `_set` on the table that has the foreign key, `_set` returns a QuerySet that can be used with `all()`, `filter()`, etc
 
