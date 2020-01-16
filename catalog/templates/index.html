@@ -12,4 +12,6 @@
         <li><strong>Authors: </strong>{{ num_authors }}</li>
         <li><strong>Books of fiction: </strong>{{ num_fictional_books }}</li>
     </ul>
+
+    <p>You have visited this page {{ num_visits }}{% if num_vists == 0 %} time {% else %} times {% endif %}</p>
 {% endblock %}

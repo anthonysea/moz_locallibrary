@@ -53,3 +53,12 @@ Django walkthrough by the Mozilla Developer Network to create a simulated librar
     ```
 
 
+- When updating `request.session`, if you are updating some information within session data, then Django willl not recognise that you've made a change to the session data, therefore you have to explicitly mark the session as having been modified
+    
+    ```python
+    # Session object not directly modified, only data within the session. Session changes not saved!
+    request.session['my_car']['wheels'] = 'alloy'
+
+    # Set session as modified to force data updates/cookie to be saved.
+    request.session.modified = True
+    ```
