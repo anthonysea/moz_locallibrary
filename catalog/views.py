@@ -36,6 +36,7 @@ class BookListView(generic.ListView):
     # queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
     # template_name = 'books/my_arbitrary_template_name_list.html' # Specify your own template name/location
     template_name = 'book_list.html'
+    paginate_by = 10
 
     # def get_queryset(self):
     #     return Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
@@ -50,3 +51,11 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'book_detail.html'
+
+class AuthorListView(generic.ListView):
+    model = Author
+    template_name = 'author_list.html'
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+    template_name = 'author_detail.html'
