@@ -66,3 +66,14 @@ Django walkthrough by the Mozilla Developer Network to create a simulated librar
 - [Limiting access to logged-in users](https://docs.djangoproject.com/en/3.0/topics/auth/default/#limiting-access-to-logged-in-users)
 
     Can use `@login_required` decorator for function-based views, or `LoginRequiredMixin` for class-based views, which is passed as an argument to the class definition
+
+- UserPassesTest Mixin to restrict access to views to a certain group of users or on a certain condition. All you have to do is override `test_func(self)` to return a boolean
+
+    ```python
+    from django.contrib.auth.mixins import UserPassesTestMixin
+
+    class MyView(UserPassesTestMixin, View):
+
+    def test_func(self):
+        return self.request.user.email.endswith('@example.com')
+    ```

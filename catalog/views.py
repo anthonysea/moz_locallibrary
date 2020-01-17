@@ -2,7 +2,7 @@ from django.shortcuts import render
 from catalog.models import Book, Author, BookInstance, Genre
 from django.db.models import Q
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
 def index(request):
     """View function for home page of the site."""
@@ -66,7 +66,17 @@ class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'author_detail.html'
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+class LoanedBooksView(LoginRequiredMixin, UserPassesTestMixin,  generic.ListView):
+    model = BookInstance
+    template_name = 'loanedbooks_list.html'
+    paginate_by = 10
+    permission_required = 'bookinstance.can_mark_returned'
+    
+    def get_queryset(self):
+        return BookInstance.objects.filter(status__exact='o').order_by('due_back')
+
+    def test_func(self):
+        return self.request.user.groups.filter(name="Librarian").exists()
 
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on loan to current user."""
