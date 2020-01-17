@@ -62,3 +62,7 @@ Django walkthrough by the Mozilla Developer Network to create a simulated librar
     # Set session as modified to force data updates/cookie to be saved.
     request.session.modified = True
     ```
+
+- [Limiting access to logged-in users](https://docs.djangoproject.com/en/3.0/topics/auth/default/#limiting-access-to-logged-in-users)
+
+    Can use `@login_required` decorator for function-based views, or `LoginRequiredMixin` for class-based views, which is passed as an argument to the class definition

@@ -1,0 +1,7 @@
+<!-- replaces the default admin log out page -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <p>Logged out!</p>
+    <a href="{% url 'login' %}">Click here to login again.</a>
+{% endblock %}
