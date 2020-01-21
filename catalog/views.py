@@ -9,6 +9,9 @@ from django.views import generic
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
 from catalog.forms import RenewBookForm
 
 def index(request):
@@ -124,3 +127,23 @@ def renew_book_librarian(request, pk):
     }
 
     return render(request, 'book_renew_librarian.html', context)
+
+
+class AuthorCreate(CreateView, PermissionRequiredMixin):
+    model = Author
+    fields = '__all__'
+    #initial = {'date_of_death': '05/01/2018'}
+    permission_required = 'catalog.can_mark_as_returned'
+    template_name = 'author_form.html'
+
+class AuthorUpdate(UpdateView, PermissionRequiredMixin):
+    model = Author
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+    permission_required = 'catalog.can_mark_as_returned'
+    template_name = 'author_form.html'
+
+class AuthorDelete(DeleteView, PermissionRequiredMixin):
+    model = Author
+    success_url = reverse_lazy('authors')
+    permission_required = 'catalog.can_mark_as_returned'
+    template_name = 'author_confirm_delete.html'
