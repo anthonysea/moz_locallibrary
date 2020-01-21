@@ -35,6 +35,28 @@ Django walkthrough by the Mozilla Developer Network to create a simulated librar
         model = Author
         template_name = 'author_detail.html'
         # queryset = Author.objects.filter(first_name__contains='sun')
+
+    from django.views.generic.edit import CreateView, UpdateView, DeleteView
+    from django.contrib.auth.mixins import PermissionRequiredMixin
+    
+    class AuthorCreateView(CreateView, PermissionRequiredMixin):
+        model = Author
+        fields = '__all__'
+        permission_required = 'catalog.some_permission'
+        template_name = 'author_form.html'
+
+    class AuthorUpdateView(UpdateView, PermissionRequiredMixin):
+        model = Author
+        fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+        permission_required = 'catalog.some_permission'
+        template_name = 'author_form.html'
+
+    class AuthorDelete(DeleteView, PermissionRequiredMixin):
+        model = Author
+        success_url = reverse_lazy('authors')
+        permission_required = 'catalog.can_mark_returned'
+        template_name = 'author_confirm_delete.html'
+
     ```
 
 
