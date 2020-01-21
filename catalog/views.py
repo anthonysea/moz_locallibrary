@@ -99,7 +99,7 @@ def renew_book_librarian(request, pk):
     book_instance = get_object_or_404(BookInstance, pk=pk)
 
     # If this is a POST request then process the Form data
-    if request.method = 'POST':
+    if request.method == 'POST':
 
         # Create a form instance and populate it with data from the request (binding):
         form = RenewBookForm(request.POST)
@@ -115,7 +115,7 @@ def renew_book_librarian(request, pk):
     
     # If this is a GET (or any other method) create the default form.
     else:
-        proposed_renewal_date = datetime.date.today + datetime.timedelta(weeks=3)
+        proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
         form = RenewBookForm(initial={'renewal_date': proposed_renewal_date})
 
     context = {
@@ -123,4 +123,4 @@ def renew_book_librarian(request, pk):
         'book_instance': book_instance,
     }
 
-    return render(request, 'catalog/book_renew_librarian.html', context)
+    return render(request, 'book_renew_librarian.html', context)
