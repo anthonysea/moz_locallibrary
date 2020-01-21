@@ -73,6 +73,7 @@ class AuthorListView(generic.ListView):
     """Generic view to list all of the authors in the database."""
     model = Author
     template_name = 'author_list.html'
+    paginate_by = 10
 
 class AuthorDetailView(generic.DetailView):
     """Generic view to view the details of an author."""
