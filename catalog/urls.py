@@ -16,7 +16,7 @@ urlpatterns += [
 
 # View all books borrowed right now, only available to librarian users
 urlpatterns += [
-    path('borrowedbooks/', views.LoanedBooksView.as_view(), name='borrowed')
+    path('borrowedbooks/', views.LoanedBooksView.as_view(), name='all-borrowed')
 ]
 
 
