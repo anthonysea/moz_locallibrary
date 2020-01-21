@@ -65,18 +65,22 @@ class BookListView(generic.ListView):
     #     return context
 
 class BookDetailView(generic.DetailView):
+    """Generic view to view the details of a single book."""
     model = Book
     template_name = 'book_detail.html'
 
 class AuthorListView(generic.ListView):
+    """Generic view to list all of the authors in the database."""
     model = Author
     template_name = 'author_list.html'
 
 class AuthorDetailView(generic.DetailView):
+    """Generic view to view the details of an author."""
     model = Author
     template_name = 'author_detail.html'
 
 class LoanedBooksView(LoginRequiredMixin, UserPassesTestMixin,  generic.ListView):
+    """Generic view that lists all the books that are currently on loan. Only available to librarian users."""
     model = BookInstance
     template_name = 'loanedbooks_list.html'
     paginate_by = 10
@@ -99,6 +103,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
 
 @permission_required('catalog.can_mark_returned')
 def renew_book_librarian(request, pk):
+    """Function-based view to manage the renewal of books out on loan."""
     book_instance = get_object_or_404(BookInstance, pk=pk)
 
     # If this is a POST request then process the Form data
@@ -130,6 +135,7 @@ def renew_book_librarian(request, pk):
 
 
 class AuthorCreate(CreateView, PermissionRequiredMixin):
+    """Generic view to add an author to the database."""
     model = Author
     fields = '__all__'
     #initial = {'date_of_death': '05/01/2018'}
@@ -137,30 +143,35 @@ class AuthorCreate(CreateView, PermissionRequiredMixin):
     template_name = 'author_form.html'
 
 class AuthorUpdate(UpdateView, PermissionRequiredMixin):
+    """Generic view to update the fields of a given author."""
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
     permission_required = 'catalog.can_mark_returned'
     template_name = 'author_form.html'
 
 class AuthorDelete(DeleteView, PermissionRequiredMixin):
+    """Generic view to confirm deletion of an author."""
     model = Author
     success_url = reverse_lazy('authors')
     permission_required = 'catalog.can_mark_returned'
     template_name = 'author_confirm_delete.html'
 
 class BookCreate(CreateView, PermissionRequiredMixin):
+    """Generic view to add a book to the database."""
     model = Book
     fields = '__all__'
     permission_required = 'catalog.can_mark_returned'
     template_name = 'book_form.html'
 
 class BookUpdate(UpdateView, PermissionRequiredMixin):
+    """Generic view to update the fields of a book."""
     model = Book
     fields = ['title', 'author', 'summary', 'isbn', 'genre', 'language']
     permission_required = 'catalog.can_mark_returned'
     template_name = 'book_form.html'
 
 class BookDelete(DeleteView, PermissionRequiredMixin):
+    """Generic view to confirm deletion of a book."""
     model = Book
     success_url = reverse_lazy('books')
     permission_required = 'catalog.can_mark_returned'
