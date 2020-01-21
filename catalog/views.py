@@ -133,17 +133,35 @@ class AuthorCreate(CreateView, PermissionRequiredMixin):
     model = Author
     fields = '__all__'
     #initial = {'date_of_death': '05/01/2018'}
-    permission_required = 'catalog.can_mark_as_returned'
+    permission_required = 'catalog.can_mark_returned'
     template_name = 'author_form.html'
 
 class AuthorUpdate(UpdateView, PermissionRequiredMixin):
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
-    permission_required = 'catalog.can_mark_as_returned'
+    permission_required = 'catalog.can_mark_returned'
     template_name = 'author_form.html'
 
 class AuthorDelete(DeleteView, PermissionRequiredMixin):
     model = Author
     success_url = reverse_lazy('authors')
-    permission_required = 'catalog.can_mark_as_returned'
+    permission_required = 'catalog.can_mark_returned'
     template_name = 'author_confirm_delete.html'
+
+class BookCreate(CreateView, PermissionRequiredMixin):
+    model = Book
+    fields = '__all__'
+    permission_required = 'catalog.can_mark_returned'
+    template_name = 'book_form.html'
+
+class BookUpdate(UpdateView, PermissionRequiredMixin):
+    model = Book
+    fields = ['title', 'author', 'summary', 'isbn', 'genre', 'language']
+    permission_required = 'catalog.can_mark_returned'
+    template_name = 'book_form.html'
+
+class BookDelete(DeleteView, PermissionRequiredMixin):
+    model = Book
+    success_url = reverse_lazy('books')
+    permission_required = 'catalog.can_mark_returned'
+    template_name = 'book_confirm_delete.html'
