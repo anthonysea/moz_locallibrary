@@ -2,6 +2,8 @@
 
 Django walkthrough by the Mozilla Developer Network to create a simulated library interface web application
 
+Hosted online through Heroku at https://pure-lowlands-01065.herokuapp.com
+
 ## Learning points
 
 - [get_absolute_url](https://docs.djangoproject.com/en/3.0/ref/models/instances/#get-absolute-url)
