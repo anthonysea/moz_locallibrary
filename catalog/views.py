@@ -85,7 +85,7 @@ class LoanedBooksView(LoginRequiredMixin, UserPassesTestMixin,  generic.ListView
     model = BookInstance
     template_name = 'loanedbooks_list.html'
     paginate_by = 10
-    permission_required = 'bookinstance.can_mark_returned'
+    permission_required = 'catalog.can_mark_returned'
     
     def get_queryset(self):
         return BookInstance.objects.filter(status__exact='o').order_by('due_back')
